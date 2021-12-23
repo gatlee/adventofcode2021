@@ -15,6 +15,8 @@
       "down" [x (+ y amount)]
       "up" [x (- y amount)])))
 
+(getNextPos [0 0] ["forward" "10"])
+
 (defn getNextPosP2
   [[x y aim] [direction amountStr]]
   (let [amount (Integer/parseInt amountStr)]
