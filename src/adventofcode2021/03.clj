@@ -1,14 +1,15 @@
 (ns adventofcode2021.03
   [:require [clojure.string :as s]]
-  (:require [clojure.java.io :as io]))
+  (:require [clojure.java.io :as io])
+  (:require [adventofcode2021.util :refer [transpose]]))
 
-(defn transpose [m]
-  (apply mapv vector m))
+
 
 
 (defn mostCommon
   [lst]
   (first (apply max-key second (frequencies lst))))
+
 
 (defn inverse
   [s]
