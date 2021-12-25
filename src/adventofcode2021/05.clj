@@ -15,15 +15,6 @@
     (s/split-lines $)
     (map parse-line $)))
 
-(defn between-inclusive
-  "Gets integer values between a and b inclusive of a and b
-  eg. (between-inclusive 1 3) ; => [1 2 3]
-  Integers can be in any order
-  eg. (between-inclusive 3 1) ; => [1 2 3]
-  "
-  [a b]
-  (let [[lo hi] (sort [a b])]
-    (range lo (inc hi))))
 (defn get-directional-unit
   [val]
   (cond
@@ -70,7 +61,6 @@
        (frequencies)
        (filter #(> (val %) 1))
        (count)))
-
 
 (solvep1 (slurp (io/resource "05-input.txt")))
 (solvep2 (slurp (io/resource "05-input.txt")))

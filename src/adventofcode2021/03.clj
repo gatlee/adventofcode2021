@@ -3,13 +3,9 @@
   (:require [clojure.java.io :as io])
   (:require [adventofcode2021.util :refer [transpose]]))
 
-
-
-
 (defn mostCommon
   [lst]
   (first (apply max-key second (frequencies lst))))
-
 
 (defn inverse
   [s]
@@ -60,14 +56,10 @@
         co2Rating (Integer/parseInt (String/join "" (getRating nums co2)) 2)]
     (* oxygenRating co2Rating)))
 
-
-
 (def nums
   (as-> (slurp (io/resource "03-input.txt")) $
     (s/split-lines $)
     (mapv #(s/split % #"") $)))
 
-
-
 (solve-p1 nums)
-;;(solve-p2 nums)
+(solve-p2 nums)

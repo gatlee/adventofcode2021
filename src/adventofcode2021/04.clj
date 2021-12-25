@@ -5,11 +5,6 @@
   (:require [clojure.set :refer [union subset?]])
   (:require [adventofcode2021.util :refer [transpose parseInt not-in?]]))
 
-(defn createBoardCell
-  [val]
-  {:value val
-   :picked false})
-
 (defn cleanBoard
   "Clean string representation of a single board"
   [board]
@@ -66,8 +61,6 @@
         bingod
         (recur (inc n) (get bingod-boards false) (concat bingod scored-boards))))))
 
-
-
 (defn solvep1
   [input]
   (->> (parse-input input)
@@ -81,7 +74,6 @@
        (find-bingo)
        (last)
        (:score)))
-
 
 (solvep1 (slurp (io/resource "04-input.txt")))
 (solvep2 (slurp (io/resource "04-input.txt")))
