@@ -1,9 +1,7 @@
 (ns adventofcode2021.05
   (:require [clojure.java.io :as io])
   (:require [clojure.string :as s])
-  (:require [clojure.walk :as w])
-  (:require [clojure.set :refer [union subset?]])
-  (:require [adventofcode2021.util :refer [transpose parseInt not-in? xor]]))
+  (:require [adventofcode2021.util :refer [parseInt xor]]))
 
 (defn parse-line
   [line]
