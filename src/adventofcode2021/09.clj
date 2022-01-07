@@ -5,10 +5,7 @@
 
 (defn parse-input
   [input]
-  (let [grid (map #(map parseChar (str % )) (s/split-lines input))]
-    {:width (count (first grid))
-     :height (count grid)
-     :data grid}))
+  (map #(map parseChar (str % )) (s/split-lines input)))
 
 (defn getHeightAtCoord
   "Gets the height at the coord. If it's out of bounds we return backupValue.
@@ -33,24 +30,19 @@
     (every? #(> (getHeightAtCoord % map) currHeight) surrounding)))
 
 (defn getLowPointCoords
-  [{:keys [width height data]}]
-  (for [x (range width)
-        y (range height)
-        :when (isLowPoint? [x y] data)]
-    [x y]))
+  [grid]
+  (let [width (count (first grid))
+        height (count grid)]
+    (for [x (range width)
+          y (range height)
+          :when (isLowPoint? [x y] grid)]
+      [x y])))
 
 (defn getLowPointValues
-  [dataObj]
-  (map #(getHeightAtCoord % (:data dataObj)) (getLowPointCoords dataObj)))
-
-(defn solvep1
-  [input]
-  (->> (parse-input input)
-       getLowPointValues
-       (map inc)
-       (reduce +)))
-
+  [grid]
+  (map #(getHeightAtCoord % grid) (getLowPointCoords grid)))
 (defn getBasinSize
+  "DFS For basins"
   [[x y] map]
   (loop [visited #{}
          toVisit [[x y]]]
@@ -66,16 +58,21 @@
           (println candidates)
           (recur (conj visited curr) (concat rest candidates))))))
 
+(defn solvep1
+  [input]
+  (->> (parse-input input)
+       getLowPointValues
+       (map inc)
+       (reduce +)))
 
 (defn solvep2
   [input]
-  (let [dataObj (parse-input input)
-        data (:data dataObj)]
-    (->> (map #(getBasinSize % data) (getLowPointCoords dataObj))
+  (let [grid (parse-input input)]
+    (->> (map #(getBasinSize % grid) (getLowPointCoords grid))
          (map count)
          sort
          (take-last 3)
          (reduce *))))
 
-;(solvep1 (slurp (io/resource "09-input.txt")))
+(solvep1 (slurp (io/resource "09-input.txt")))
 (solvep2 (slurp (io/resource "09-input.txt")))
