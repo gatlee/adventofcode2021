@@ -14,10 +14,12 @@
   (Character/digit val 10))
 
 (defn in?
+  "Returns true if collection contains elm"
   [coll elm]
   (some #(= elm %) coll))
 
 (def not-in? (complement in?))
+
 (defn xor
   [a b]
   (or (and a (not b))
